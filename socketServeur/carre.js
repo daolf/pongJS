@@ -1,29 +1,27 @@
 module.exports = {
     carre: function(x, y) {
-        this.x = x;
-        this.y = y;
-        this.length = 20;
-        this.update = function(ctx) {
-            ctx.rect(this.x, this.y, this.length, this.length);
+        this.info = [x,y,20];
+        this.update = function(coord, ctx) {
+            ctx.rect(coord[0], coord[1], coord[2], coord[2]);
             ctx.stroke();
         };
         this.padding = 10;
 
         this.moveLeft = function() {
-            this.x -= this.padding;
+            this.info[0] -= this.info[2];
         };
 
         this.moveRight = function() {
-            this.x += this.padding;
+            this.info[0] += this.info[2];
         };
 
         this.moveUp = function() {
-            this.y += this.padding;
+            this.info[1] += this.info[2];
         };
 
 
         this.moveDown = function() {
-            this.y -= this.padding;
+            this.info[1] -= this.info[2];
         };
     }
 };

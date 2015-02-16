@@ -19,7 +19,8 @@ module.exports = function(io) {
                     myCarre.moveDown();
                     break;
             }
-            console.log("X: "+myCarre.x+"Y: "+myCarre.y);
+            console.log("X: "+myCarre.info[0]+" Y: "+myCarre.info[1]);
+            socket.emit("refresh",{info: myCarre.info,refresh: myCarre["update"]});
         });
     });
 };
