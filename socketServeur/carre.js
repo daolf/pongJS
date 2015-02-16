@@ -12,12 +12,12 @@ module.exports = {
         };
 
         this.moveUp = function() {
-            this.info[1] += this.info[2];
+            this.info[1] -= this.info[2];
         };
 
 
         this.moveDown = function() {
-            this.info[1] -= this.info[2];
+            this.info[1] += this.info[2];
         };
     }
 };

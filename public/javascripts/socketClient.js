@@ -4,7 +4,8 @@ var listKey = [37, 38, 39, 40];
 var socket = io.connect('http://localhost:3000');
 
 var update = function(coord, ctx) {
-    ctx.rect(coord[0], coord[1], coord[2], coord[2]);
+    ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(coord[0], coord[1], coord[2], coord[2]);
     ctx.stroke();
 };
 
