@@ -1,5 +1,5 @@
 module.exports = function (io) {
-    io.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
+    io.on('keyPressed', function (socket) {
+      console.log("La touche appuyée est : " + socket.keyCode);
     });
-}
+};
