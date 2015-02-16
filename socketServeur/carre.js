@@ -1,10 +1,6 @@
 module.exports = {
     carre: function(x, y) {
         this.info = [x,y,20];
-        this.update = function(coord, ctx) {
-            ctx.rect(coord[0], coord[1], coord[2], coord[2]);
-            ctx.stroke();
-        };
         this.padding = 10;
 
         this.moveLeft = function() {

@@ -20,7 +20,7 @@ module.exports = function(io) {
                     break;
             }
             console.log("X: "+myCarre.info[0]+" Y: "+myCarre.info[1]);
-            socket.emit("refresh",{info: myCarre.info,refresh: myCarre["update"]});
+            socket.emit("refresh",{info: myCarre.info});
         });
     });
 };
