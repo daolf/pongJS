@@ -57,7 +57,6 @@ module.exports = {
                     ) {
                         console.log("YOLO !!!");
                         balle.direction[0] *= -1;
-                        //balle.direction.map(function (x) {return x*(-1);});
                     }
 
                 }
@@ -70,7 +69,6 @@ module.exports = {
                     ) {
                         console.log("YOLO 2 !!!");
                         balle.direction[0] *= -1;
-                        //balle.direction.map(function (x) {return x*(-1);});
                     }
 
                 }
