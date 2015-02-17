@@ -1,19 +1,19 @@
 var listKey = [38, 40];
 
 
-//var socket = io.connect('http://192.168.10.104:3000');
-var socket = io.connect('http://192.168.10.106:3000');
+var socket = io.connect('http://192.168.10.104:3000');
+//var socket = io.connect('http://192.168.10.106:3000');
 
 
 var update = function(info, ctx) {
     ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
     
-    ctx.fillRect(info[0], info[1], 10, 80);
+    ctx.fillRect(info[0], info[1], info[2], info[3]);
     ctx.stroke();
-    ctx.fillRect(info[2], info[3], 10, 80);
+    ctx.fillRect(info[4], info[5], info[6], info[7]);
     ctx.stroke();
     //dessin balle
-    ctx.fillRect(info[4], info[5], 10, 10);
+    ctx.fillRect(info[8], info[9], info[10], info[10]);
     ctx.stroke();
 };
 
