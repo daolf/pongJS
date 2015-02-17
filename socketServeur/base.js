@@ -1,9 +1,11 @@
 module.exports = function(io) {
+    var carre = require("./carre.js");
+    var myCarre = new carre.carre(0, 0);
+
     console.log("Bienvenue sur le serveur !!!");
     io.on('connection', function(socket) {
-        var carre = require("./carre.js");
-        var myCarre = new carre.carre(0, 0);
 
+        socket.emit("refresh",{info: myCarre.info});
         socket.on('keyPressed', function(data) {
             switch (data.keyCode) {
                 case 37:
