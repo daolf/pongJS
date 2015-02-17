@@ -8,7 +8,9 @@ module.exports = function(io) {
         console.log("Un nouveau client se connecte: " + socket);
 
         myPong.setSocketBarre(socket);
-        setInterval( //On demande au clients de refraichir leurs vues
+
+        //On demande au clients de refraichir leurs vues 60 fois par secondes
+        setInterval(
             function() {
                 io.sockets.emit("refresh", {
                     info: myPong.getInfos()
@@ -16,7 +18,7 @@ module.exports = function(io) {
             }, 16);
 
         // Le client appuis sur une touche et est le proprietaire d'une barre
-        if (myPong.getMyBarre(socket) != null) {
+        if (myPong.getMyBarre(socket) !== null) {
             socket.on('keyPressed', function(data) {
                 switch (data.keyCode) {
                     case 38:
