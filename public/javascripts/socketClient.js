@@ -3,12 +3,12 @@ var listKey = [38, 40];
 
 var socket = io.connect('http://192.168.10.104:3000');
 
-var update = function(myInfo, otherInfo, ctx) {
+var update = function(info, ctx) {
     ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
     
-    ctx.fillRect(myInfo[0], myInfo[1], 10, 80);
+    ctx.fillRect(info[0], info[1], 10, 80);
     ctx.stroke();
-    ctx.fillRect(otherInfo[0], otherInfo[1], 10, 80);
+    ctx.fillRect(info[2], info[3], 10, 80);
     ctx.stroke();
 };
 
@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     socket.on("refresh", function(data) {
       console.log(data.info);
-      update(data.myInfo, data.otherInfo, ctx);
+      update(data.info, ctx);
     });
 
 
