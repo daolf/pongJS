@@ -5,7 +5,10 @@ module.exports = function(io) {
     console.log("Bienvenue sur le serveur !!!");
     io.on('connection', function(socket) {
 
+        console.log("Un nouveau client se connecte: " + socket);
         socket.emit("refresh",{info: myCarre.info});
+
+        // Le client appuis sur une touche
         socket.on('keyPressed', function(data) {
             switch (data.keyCode) {
                 case 37:
@@ -22,7 +25,9 @@ module.exports = function(io) {
                     break;
             }
             console.log("X: "+myCarre.info[0]+" Y: "+myCarre.info[1]);
-            socket.emit("refresh",{info: myCarre.info});
+
+            //On demande au clients de refraichir leurs vues
+            io.sockets.emit("refresh",{info: myCarre.info});
         });
     });
 };
