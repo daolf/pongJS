@@ -8,6 +8,9 @@ module.exports = {
 		this.rightBarre = new barre.barre(100, 0);
     this.balle = new carre.carre(20,20);
 
+    //on lance l'update physique de la balle
+    this.balle.launchPhysics();
+    
 		this.setSocketBarre = function(socket) {
 			console.log("socket: " + this.leftBarre.socket);
 			if (this.leftBarre.socket === null) {

@@ -8,6 +8,12 @@ module.exports = function(io) {
         console.log("Un nouveau client se connecte: " + socket);
 
         myPong.setSocketBarre(socket);
+        setInterval( //On demande au clients de refraichir leurs vues
+            function() {
+                io.sockets.emit("refresh", {
+                    info: myPong.getInfos()
+                });
+            }, 16);
 
         // Le client appuis sur une touche et est le proprietaire d'une barre
         if (myPong.getMyBarre(socket) != null) {
@@ -21,9 +27,6 @@ module.exports = function(io) {
                         break;
                 }
                 // console.log("X: "+myBarre.info[0]+" Y: "+myBarre.info[1]);
-
-                //On demande au clients de refraichir leurs vues
-                io.sockets.emit("refresh",{info: myPong.getInfos()});
             });
         }
     });
