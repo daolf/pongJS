@@ -1,7 +1,7 @@
-var listKey = [37, 38, 39, 40];
+var listKey = [38, 40];
 
 
-var socket = io.connect('http://192.168.10.106:3000');
+var socket = io.connect('http://192.168.10.104:3000');
 
 var update = function(myInfo, otherInfo, ctx) {
     ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);

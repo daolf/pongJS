@@ -29,21 +29,24 @@ module.exports = function(io) {
                                           otherBarre = leftBarre;}
 
 
-        // Le client appuis sur une touche
-        socket.on('keyPressed', function(data) {
-            switch (data.keyCode) {
-                case 38:
-                    myBarre.moveUp();
-                    break;
-                case 40:
-                    myBarre.moveDown();
-                    break;
-            }
-            console.log("X: "+myBarre.info[0]+" Y: "+myBarre.info[1]);
 
-            //On demande au clients de refraichir leurs vues
-            io.sockets.emit("refresh",{myInfo: myBarre.info,
-                                       otherInfo : otherBarre.info});
-        });
+        // Le client appuis sur une touche et est le proprietaire d'une barre
+        if (leftBarre.socket === socket || rightBarre.socket === socket) {
+            socket.on('keyPressed', function(data) {
+                switch (data.keyCode) {
+                    case 38:
+                        myBarre.moveUp();
+                        break;
+                    case 40:
+                        myBarre.moveDown();
+                        break;
+                }
+                console.log("X: "+myBarre.info[0]+" Y: "+myBarre.info[1]);
+
+                //On demande au clients de refraichir leurs vues
+                io.sockets.emit("refresh",{myInfo: myBarre.info,
+                                           otherInfo : otherBarre.info});
+            });
+        }
     });
 };
