@@ -55,9 +55,11 @@ module.exports = {
 
 
         this.launchPhysics = function() {
+
             setInterval(function(balle, leftBarre, rightBarre, scoreJoueurD, scoreJoueurG) {
                 balle.info[0] += balle.speed * balle.direction[0];
                 balle.info[1] += balle.speed * balle.direction[1];
+
 
                 /*
                 Calcul du vecteur vitesse rebond
