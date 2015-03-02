@@ -7,6 +7,8 @@ module.exports = {
         this.leftBarre = new barre.barre(0, 0);
         this.rightBarre = new barre.barre(350, 0);
         this.balle = new carre.carre(20, 20);
+        this.height = 400;
+        this.width = 400;
 
         this.setSocketBarre = function(socket) {
             console.log("socket: " + this.leftBarre.socket);
