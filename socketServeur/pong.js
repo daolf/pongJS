@@ -10,6 +10,9 @@ module.exports = {
         this.height = 400;
         this.width = 400;
         this.maxAngle = 85;
+        this.scoreJoueurD = 0;
+        this.scoreJoueurG = 0;
+        var self=this;
 
         this.setSocketBarre = function(socket) {
             console.log("socket: " + this.leftBarre.socket);
@@ -32,7 +35,9 @@ module.exports = {
                 this.rightBarre.info[3], //Hauteur
                 this.balle.info[0], //X
                 this.balle.info[1], //Y
-                this.balle.info[2]
+                this.balle.info[2],
+                this.scoreJoueurD, // scoreJoueurDroit
+                this.scoreJoueurG  // scoreJoueurGauche
             ]; //Dimension
             return infos;
         };
@@ -50,7 +55,7 @@ module.exports = {
 
 
         this.launchPhysics = function() {
-            setInterval(function(balle, leftBarre, rightBarre) {
+            setInterval(function(balle, leftBarre, rightBarre, scoreJoueurD, scoreJoueurG) {
                 balle.info[0] += balle.speed * balle.direction[0];
                 balle.info[1] += balle.speed * balle.direction[1];
 
@@ -75,14 +80,14 @@ module.exports = {
 
                 //collision balle raquette gauche
                 if (leftBarre.isCollide(balle.info[0], balle.info[1], balle.info[2], balle.info[2])) {
-                    console.log("Collision raquette gauche !!!");
+                    //console.log("Collision raquette gauche !!!");
                     var dirL = bounce(leftBarre.info[1], leftBarre.info[3], balle.info[1]);
                     balle.direction = [-1*dirL[0],dirL[1]];
                 }
 
                 //collision balle raquette droite
                 if (rightBarre.isCollide(balle.info[0], balle.info[1], balle.info[2], balle.info[2])) {
-                    console.log("Collision raquette droite !!!");
+                    //console.log("Collision raquette droite !!!");
                     balle.direction = bounce(rightBarre.info[1], rightBarre.info[3], balle.info[1]);
                 }
 
@@ -95,10 +100,24 @@ module.exports = {
                 if ((balle.info[1] + balle.info[2]) > 400){
                   balle.direction[1]*=-1;
                 }
-
                 //score
+                //Joueur droit perd
+                if((balle.info[0]+balle.info[2]) >= rightBarre.info[0]) {
+                  self.scoreJoueurG++;
+                  //On remet la balle au milieu
+                  console.log("Balle :" + balle.info);
+                  // COMPRENDRE POURQUOI
+                  balle.init(20,20);
+                }
+                //Joueur gauche perd
+                if(balle.info[0] <= (leftBarre.info[0] + leftBarre.info[2])) {
+                  self.scoreJoueurD++ ;
+                  //On remet la balle au milieu
+                  console.log("Balle :" + balle.info);
+                  balle.init(20,20);
+                }
 
-            }, 16, this.balle, this.leftBarre, this.rightBarre);
+            }, 16, this.balle, this.leftBarre, this.rightBarre, this.scoreJoueurD, this.scoreJoueurG);
         };
 
         //on lance l'update physique de la balle

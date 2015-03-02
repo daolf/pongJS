@@ -1,8 +1,8 @@
 var listKey = [38, 40];
 
-// var socket = io.connect('http://192.168.0.11:3000');
+ var socket = io.connect('http://192.168.0.11:3000');
 //Ellie ip St sernin
-var socket = io.connect('http://192.168.0.17:3000');
+//var socket = io.connect('http://192.168.0.17:3000');
 //var socket = io.connect('http://192.168.10.106:3000');
 
 
@@ -16,6 +16,12 @@ var update = function(info, ctx) {
     //dessin balle
     ctx.fillRect(info[8], info[9], info[10], info[10]);
     ctx.stroke();
+
+    $(".scoreD").text(info[11]);
+    console.log("ScoreD" + info[11]);
+    $(".scoreG").text(info[12]);
+    console.log("ScoreG" + info[12]);
+
 };
 
 $(document).ready(function() {
@@ -24,7 +30,7 @@ $(document).ready(function() {
 
     $(document).keydown(function(event) {
         if (listKey.indexOf(event.keyCode) != -1) {
-            console.log(event.keyCode);
+            //console.log(event.keyCode);
             socket.emit("keyPressed", {
                 keyCode: event.keyCode
             });
@@ -32,8 +38,9 @@ $(document).ready(function() {
     });
 
     socket.on("refresh", function(data) {
-      console.log(data.info);
+      //console.log(data.info);
       update(data.info, ctx);
+      
     });
 
 

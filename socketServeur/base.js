@@ -15,6 +15,7 @@ module.exports = function(io) {
                 io.sockets.emit("refresh", {
                     info: myPong.getInfos()
                 });
+                //console.log(myPong.getInfos());
             }, 16);
 
         // Le client appuis sur une touche et est le proprietaire d'une barre
