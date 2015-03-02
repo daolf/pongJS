@@ -19,5 +19,15 @@ module.exports = {
             if (this.info[1] + this.info[3] < height)
                 this.info[1] += this.info[4];
         };
+
+        this.isCollide = function(objX, objY, objW, objH) {
+            if (objX < this.info[0] + this.info[2] && objX + objW > this.info[0] &&
+                objY < this.info[1] + this.info[3] && objY + objH > this.info[1]) {
+
+                console.log("Collision détectée !");
+                return (true);
+            }
+            return (false);
+        };
     }
 };

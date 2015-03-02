@@ -64,45 +64,28 @@ module.exports = {
                     var x = Math.cos(bounceAngle);
                     var y = -Math.sin(bounceAngle);
 
-                    console.log("---------------------------------------");
-                    console.log("Y = " + Y + "Height = " + Height + "intersectY =" + intersectY);
-                    console.log("RelInter = " + relInter+"Height = " + Height);
-                    console.log("NormaleInter :" + normaleInter);
-                    console.log("BounceAngle = "+bounceAngle);
-
-
+                    // console.log("---------------------------------------");
+                    // console.log("Y = " + Y + "Height = " + Height + "intersectY =" + intersectY);
+                    // console.log("RelInter = " + relInter+"Height = " + Height);
+                    // console.log("NormaleInter :" + normaleInter);
+                    // console.log("BounceAngle = "+bounceAngle);
 
                     return [x,y];
                 };
 
-
-
                 //collision balle raquette gauche
-                if (
-                    (balle.info[1] <= (leftBarre.info[1] + leftBarre.info[3])) && ((balle.info[1] + balle.info[2]) >= leftBarre.info[1])
-                ) {
-                    if (
-                        (balle.info[0] <= (leftBarre.info[0] + leftBarre.info[2])) && ((balle.info[0] + balle.info[2]) >= leftBarre.info[0])
-                    ) {
-                        console.log("Collision raquette gauche !!!");
-                        var dirL = bounce(leftBarre.info[1], leftBarre.info[3], balle.info[1]);
-                        balle.direction = [-1*dirL[0],dirL[1]];
-                    }
-
+                if (leftBarre.isCollide(balle.info[0], balle.info[1], balle.info[2], balle.info[2])) {
+                    console.log("Collision raquette gauche !!!");
+                    var dirL = bounce(leftBarre.info[1], leftBarre.info[3], balle.info[1]);
+                    balle.direction = [-1*dirL[0],dirL[1]];
                 }
-                //collicion balle raquette droite
-                if (
-                    ((balle.info[1] + balle.info[2]) <= (rightBarre.info[1] + rightBarre.info[3])) && ((balle.info[1] + balle.info[2]) >= rightBarre.info[1])
-                ) {
-                    if (
-                        ((balle.info[0] + balle.info[2]) <= (rightBarre.info[0] + rightBarre.info[3])) && ((balle.info[0] + balle.info[2]) >= rightBarre.info[0])
-                    ) {
-                        console.log("Collision raquette droite");
-                        balle.direction = bounce(rightBarre.info[1], rightBarre.info[3], balle.info[1]);
 
-                    }
-
+                //collision balle raquette droite
+                if (rightBarre.isCollide(balle.info[0], balle.info[1], balle.info[2], balle.info[2])) {
+                    console.log("Collision raquette droite !!!");
+                    balle.direction = bounce(rightBarre.info[1], rightBarre.info[3], balle.info[1]);
                 }
+
                 //collision bordure
                 //bord haut 
                 if ((balle.info[1]) < 0){
@@ -113,13 +96,7 @@ module.exports = {
                   balle.direction[1]*=-1;
                 }
 
-                //collision raquette bord
-
-
                 //score
-
-
-
 
             }, 16, this.balle, this.leftBarre, this.rightBarre);
         };
