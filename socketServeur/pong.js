@@ -9,6 +9,7 @@ module.exports = {
         this.balle = new carre.carre(20, 20);
         this.height = 400;
         this.width = 400;
+        this.maxAngle = 85;
 
         this.setSocketBarre = function(socket) {
             console.log("socket: " + this.leftBarre.socket);
@@ -24,7 +25,7 @@ module.exports = {
                 this.leftBarre.info[0], //X
                 this.leftBarre.info[1], //Y
                 this.leftBarre.info[2], //Largeur
-                this.leftBarre.info[3], //Hauteur					 
+                this.leftBarre.info[3], //Hauteur          
                 this.rightBarre.info[0], //X
                 this.rightBarre.info[1], //Y
                 this.rightBarre.info[2], //Largeur
@@ -46,10 +47,36 @@ module.exports = {
             }
         };
 
+
+
         this.launchPhysics = function() {
             setInterval(function(balle, leftBarre, rightBarre) {
                 balle.info[0] += balle.speed * balle.direction[0];
                 balle.info[1] += balle.speed * balle.direction[1];
+
+                /*
+                Calcul du vecteur vitesse rebond
+                */
+                var bounce = function(Y, Height, intersectY) {
+                    var relInter = (Y + (Height / 2)) - intersectY;
+                    var normaleInter = (relInter / (Height / 2));
+                    var bounceAngle = normaleInter * 75;
+                    var x = Math.cos(bounceAngle);
+                    var y = -Math.sin(bounceAngle);
+
+                    console.log("---------------------------------------");
+                    console.log("Y = " + Y + "Height = " + Height + "intersectY =" + intersectY);
+                    console.log("RelInter = " + relInter+"Height = " + Height);
+                    console.log("NormaleInter :" + normaleInter);
+                    console.log("BounceAngle = "+bounceAngle);
+
+
+
+                    return [x,y];
+                };
+
+
+
                 //collision balle raquette gauche
                 if (
                     (balle.info[1] <= (leftBarre.info[1] + leftBarre.info[3])) && ((balle.info[1] + balle.info[2]) >= leftBarre.info[1])
@@ -58,7 +85,8 @@ module.exports = {
                         (balle.info[0] <= (leftBarre.info[0] + leftBarre.info[2])) && ((balle.info[0] + balle.info[2]) >= leftBarre.info[0])
                     ) {
                         console.log("Collision raquette gauche !!!");
-                        balle.direction[0] *= -1;
+                        var dirL = bounce(leftBarre.info[1], leftBarre.info[3], balle.info[1]);
+                        balle.direction = [-1*dirL[0],dirL[1]];
                     }
 
                 }
@@ -69,12 +97,21 @@ module.exports = {
                     if (
                         ((balle.info[0] + balle.info[2]) <= (rightBarre.info[0] + rightBarre.info[3])) && ((balle.info[0] + balle.info[2]) >= rightBarre.info[0])
                     ) {
-                        console.log("Collision raquette gauche");
-                        balle.direction[0] *= -1;
+                        console.log("Collision raquette droite");
+                        balle.direction = bounce(rightBarre.info[1], rightBarre.info[3], balle.info[1]);
+
                     }
 
                 }
                 //collision bordure
+                //bord haut 
+                if ((balle.info[1]) < 0){
+                  balle.direction[1]*=-1;
+                }
+                // bord bas
+                if ((balle.info[1] + balle.info[2]) > 400){
+                  balle.direction[1]*=-1;
+                }
 
                 //collision raquette bord
 

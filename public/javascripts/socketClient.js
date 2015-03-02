@@ -1,8 +1,8 @@
 var listKey = [38, 40];
 
-//var socket = io.connect('http://192.168.0.11:3000');
+var socket = io.connect('http://192.168.0.11:3000');
 //Ellie ip St sernin
-var socket = io.connect('http://192.168.0.17:3000');
+//var socket = io.connect('http://192.168.0.17:3000');
 //var socket = io.connect('http://192.168.10.106:3000');
 
 
