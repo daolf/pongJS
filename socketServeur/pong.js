@@ -18,7 +18,8 @@ module.exports = {
         };
 
         this.getInfos = function() {
-            var infos = [this.leftBarre.info[0], //X
+            var infos = [
+                this.leftBarre.info[0], //X
                 this.leftBarre.info[1], //Y
                 this.leftBarre.info[2], //Largeur
                 this.leftBarre.info[3], //Hauteur					 
@@ -47,15 +48,14 @@ module.exports = {
             setInterval(function(balle, leftBarre, rightBarre) {
                 balle.info[0] += balle.speed * balle.direction[0];
                 balle.info[1] += balle.speed * balle.direction[1];
-                //collisionn balle raquette gauche
+                //collision balle raquette gauche
                 if (
-                    (balle.info[1] <= (leftBarre.info[1] + leftBarre.info[3]))
-                    && ((balle.info[1] + balle.info[2]) >= leftBarre.info[1])
+                    (balle.info[1] <= (leftBarre.info[1] + leftBarre.info[3])) && ((balle.info[1] + balle.info[2]) >= leftBarre.info[1])
                 ) {
                     if (
                         (balle.info[0] <= (leftBarre.info[0] + leftBarre.info[2])) && ((balle.info[0] + balle.info[2]) >= leftBarre.info[0])
                     ) {
-                        console.log("YOLO !!!");
+                        console.log("Collision raquette gauche !!!");
                         balle.direction[0] *= -1;
                     }
 
@@ -67,7 +67,7 @@ module.exports = {
                     if (
                         ((balle.info[0] + balle.info[2]) <= (rightBarre.info[0] + rightBarre.info[3])) && ((balle.info[0] + balle.info[2]) >= rightBarre.info[0])
                     ) {
-                        console.log("YOLO 2 !!!");
+                        console.log("Collision raquette gauche");
                         balle.direction[0] *= -1;
                     }
 
@@ -75,6 +75,12 @@ module.exports = {
                 //collision bordure
 
                 //collision raquette bord
+
+
+                //score
+
+
+
 
             }, 16, this.balle, this.leftBarre, this.rightBarre);
         };
