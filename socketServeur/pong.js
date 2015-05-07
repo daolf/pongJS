@@ -4,9 +4,9 @@ var carre = require("./carre.js");
 module.exports = {
 
     pong: function() {
-        this.leftBarre = new barre.barre(0, 0);
+        this.leftBarre = new barre.barre(30, 0);
         this.rightBarre = new barre.barre(350, 0);
-        this.balle = new carre.carre(20, 20);
+        this.balle = new carre.carre(50, 50);
         this.height = 400;
         this.width = 400;
         this.maxAngle = 85;
@@ -82,15 +82,17 @@ module.exports = {
 
                 //collision balle raquette gauche
                 if (leftBarre.isCollide(balle.info[0], balle.info[1], balle.info[2], balle.info[2])) {
-                    //console.log("Collision raquette gauche !!!");
-                    var dirL = bounce(leftBarre.info[1], leftBarre.info[3], balle.info[1]);
-                    balle.direction = [-1*dirL[0],dirL[1]];
+                    console.log("Collision raquette gauche !!!");
+                    // var dirL = bounce(leftBarre.info[1], leftBarre.info[3], balle.info[1]);
+                    // balle.direction = [-1*dirL[0],dirL[1]];
+                    balle.direction[0]*=-1;
                 }
 
                 //collision balle raquette droite
                 if (rightBarre.isCollide(balle.info[0], balle.info[1], balle.info[2], balle.info[2])) {
-                    //console.log("Collision raquette droite !!!");
-                    balle.direction = bounce(rightBarre.info[1], rightBarre.info[3], balle.info[1]);
+                    console.log("Collision raquette droite !!!");
+                    //balle.direction = bounce(rightBarre.info[1], rightBarre.info[3], balle.info[1]);
+                    balle.direction[0]*=-1;
                 }
 
                 //collision bordure
@@ -104,19 +106,19 @@ module.exports = {
                 }
                 //score
                 //Joueur droit perd
-                if((balle.info[0]+balle.info[2]) >= rightBarre.info[0]) {
+                if((balle.info[0]+balle.info[2]) > rightBarre.info[0] + 10) {
                   self.scoreJoueurG++;
                   //On remet la balle au milieu
-                  console.log("Balle :" + balle.info);
+                  console.log("Joueur droit perd Balle :" + balle.info);
                   // COMPRENDRE POURQUOI
-                  balle.init(20,20);
+                  balle.init(50,50);
                 }
                 //Joueur gauche perd
-                if(balle.info[0] <= (leftBarre.info[0] + leftBarre.info[2])) {
+                if(balle.info[0] < (leftBarre.info[0] + leftBarre.info[2]) - 10) {
                   self.scoreJoueurD++ ;
                   //On remet la balle au milieu
-                  console.log("Balle :" + balle.info);
-                  balle.init(20,20);
+                  console.log("Joueur Gauche perd Balle :" + balle.info);
+                  balle.init(50,50);
                 }
 
             }, 16, this.balle, this.leftBarre, this.rightBarre, this.scoreJoueurD, this.scoreJoueurG);
