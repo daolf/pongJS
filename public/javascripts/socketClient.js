@@ -17,9 +17,9 @@ var update = function(info, ctx) {
     ctx.fillRect(info[8], info[9], info[10], info[10]);
     ctx.stroke();
 
-    $(".scoreD").text("Score droit : "+info[11]);
+    $(".scoreR").text("Score Right : "+info[11]);
     console.log("ScoreD" + info[11]);
-    $(".scoreG").text("Score gauche : "+info[12]);
+    $(".scoreL").text("Score Left : "+info[12]);
     console.log("ScoreG" + info[12]);
 
 };
