@@ -1,6 +1,6 @@
 module.exports = function(io) {
-    var pong = require("./pong.js");
-    var myPong = new pong.pong();
+    var Pong = require("./pong.js");
+    var myPong = new Pong();
 
     console.log("Bienvenue sur le serveur !!!");
     io.on('connection', function(socket) {
@@ -15,6 +15,7 @@ module.exports = function(io) {
                 io.sockets.emit("refresh", {
                     info: myPong.getInfos()
                 });
+                //console.log(myPong.getInfos());
             }, 16);
 
         // Le client appuis sur une touche et est le proprietaire d'une barre
@@ -22,10 +23,10 @@ module.exports = function(io) {
             socket.on('keyPressed', function(data) {
                 switch (data.keyCode) {
                     case 38:
-                        myPong.getMyBarre(socket).moveUp();
+                        myPong.getMyBarre(socket).moveUp(myPong.height);
                         break;
                     case 40:
-                        myPong.getMyBarre(socket).moveDown();
+                        myPong.getMyBarre(socket).moveDown(myPong.height);
                         break;
                 }
                 // console.log("X: "+myBarre.info[0]+" Y: "+myBarre.info[1]);
