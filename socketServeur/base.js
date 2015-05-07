@@ -1,6 +1,6 @@
 module.exports = function(io) {
-    var pong = require("./pong.js");
-    var myPong = new pong.pong();
+    var Pong = require("./pong.js");
+    var myPong = new Pong();
 
     console.log("Bienvenue sur le serveur !!!");
     io.on('connection', function(socket) {
