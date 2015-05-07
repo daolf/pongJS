@@ -1,11 +1,11 @@
 var barre = require("./barre.js");
-var carre = require("./carre.js");
+var Square = require("./square.js");
 
 
 var Pong = function() {
     this.leftBarre = new barre.barre(30, 0);
     this.rightBarre = new barre.barre(350, 0);
-    this.ball = new carre.carre(50, 50);
+    this.ball = new Square(50, 50);
     this.height = 400;
     this.width = 400;
     this.maxAngle = 85;
