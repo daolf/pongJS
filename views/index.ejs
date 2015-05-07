@@ -4,26 +4,51 @@
 	<meta charset="UTF-8">
 	<title>Bonjour</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<style type="text/css" >
+		button {
+			height: 100%;
+			width: 100%;
+		}
+	</style>
 </head>
 <body>
-
-<div class="scoreR">
-	A
-</div>
-<div class="scoreL">
-	B
-</div>
-
-<canvas id="myCanvas" width="400" height="400" style="border:1px solid black">
-	
-
-
-
-</canvas>	
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="/javascripts/socketClient.js"></script>
-
-	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				<div class="scoreR">
+					A
+				</div>
+				<div class="scoreL">
+					B
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<button type="">
+						UP
+					</button>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<button type="">
+						DOWN
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<canvas id="myCanvas" width="400" height="400" style="border:1px solid black">
+				</canvas>	
+			</div>
+		</div>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/socketClient.js"></script>
 </body>
 </html>
