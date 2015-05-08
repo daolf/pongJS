@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Bonjour</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
@@ -12,8 +13,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<style type="text/css" >
 		button {
-			height: 100%;
-			width: 100%;
+			height: 150px;
+			width: 100px;
+			border: 1px solid black;
 		}
 	</style>
 </head>
@@ -29,15 +31,9 @@
 				</div>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<button type="" class="buttonUp">
-						UP
-					</button>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<button type="" class="buttonDown">
-						DOWN
-					</button>
+				<div class="btn-group" role="group" aria-label="control">
+					<button type="button" class="btn btn-default buttonUp"> UP </button>
+					<button type="button" class="btn btn-default buttonDown"> DOWN </button>
 				</div>
 			</div>
 		</div>
