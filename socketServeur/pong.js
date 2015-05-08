@@ -4,10 +4,10 @@ var Square = require("./square.js");
 
 var Pong = function() {
     this.leftBarre = new barre.barre(30, 0);
-    this.rightBarre = new barre.barre(350, 0);
+    this.rightBarre = new barre.barre(310, 0);
     this.ball = new Square(50, 50);
-    this.height = 400;
-    this.width = 400;
+    this.height = 350;
+    this.width = 350;
     this.maxAngle = 85;
     this.scoreRightPlayer = 0;
     this.scoreLeftPlayer = 0;
