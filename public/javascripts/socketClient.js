@@ -31,12 +31,6 @@ $(document).ready(function() {
     var buttonUp = false;
     var interval;
 
-    $(document).mouseup(function() {
-        buttonDown = false;
-        buttonUp = false;
-        clearInterval(interval);
-    });
-
     $(document).keydown(function(event) {
         if (listKey.indexOf(event.keyCode) != -1) {
             //console.log(event.keyCode);
@@ -63,14 +57,22 @@ $(document).ready(function() {
         }
     }
 
-    $('.buttonUp').mousedown(function(event) {
+    $('.buttonUp').bind('touchstart',function(event) {
         buttonUp = true;
         interval = setInterval(buttonHandler,100);
+    }).bind('touchend', function(event) {
+      /* Act on the event */
+      buttonUp = false;
+      clearInterval(interval);
     });
 
-    $('.buttonDown').mousedown(function() {
+    $('.buttonDown').bind('touchstart',function() {
         buttonDown = true;
         interval = setInterval(buttonHandler,100);
+    }).bind('touchend', function(event) {
+      /* Act on the event */
+      buttonDown = false;
+      clearInterval(interval);
     });
 
     socket.on("refresh", function(data) {
