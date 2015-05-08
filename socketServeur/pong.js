@@ -1,10 +1,10 @@
-var barre = require("./barre.js");
+var Racket = require("./racket.js");
 var Square = require("./square.js");
 
 
 var Pong = function() {
-    this.leftBarre = new barre.barre(30, 0);
-    this.rightBarre = new barre.barre(310, 0);
+    this.leftRacket = new Racket(30, 0);
+    this.rightRacket = new Racket(310, 0);
     this.ball = new Square(50, 50);
     this.height = 350;
     this.width = 350;
@@ -15,25 +15,25 @@ var Pong = function() {
     this.launchPhysics();
 };
 
-Pong.prototype.setSocketBarre = function(socket) {
-    console.log("socket: " + this.leftBarre.socket);
-    if (this.leftBarre.socket === null) {
-        this.leftBarre.socket = socket;
-    } else if (this.rightBarre.socket === null) {
-        this.rightBarre.socket = socket;
+Pong.prototype.setSocketRacket = function(socket) {
+    console.log("socket: " + this.leftRacket.socket);
+    if (this.leftRacket.socket === null) {
+        this.leftRacket.socket = socket;
+    } else if (this.rightRacket.socket === null) {
+        this.rightRacket.socket = socket;
     }
 };
 
 Pong.prototype.getInfos = function() {
     var infos = [
-        this.leftBarre.info[0], //X
-        this.leftBarre.info[1], //Y
-        this.leftBarre.info[2], //Width
-        this.leftBarre.info[3], //Heigh          
-        this.rightBarre.info[0], //X
-        this.rightBarre.info[1], //Y
-        this.rightBarre.info[2], //Width
-        this.rightBarre.info[3], //Heigh
+        this.leftRacket.info[0], //X
+        this.leftRacket.info[1], //Y
+        this.leftRacket.info[2], //Width
+        this.leftRacket.info[3], //Heigh          
+        this.rightRacket.info[0], //X
+        this.rightRacket.info[1], //Y
+        this.rightRacket.info[2], //Width
+        this.rightRacket.info[3], //Heigh
         this.ball.info[0], //X
         this.ball.info[1], //Y
         this.ball.info[2],
@@ -43,29 +43,29 @@ Pong.prototype.getInfos = function() {
     return infos;
 };
 
-Pong.prototype.getMyBarre = function(socket) {
-    if (this.leftBarre.socket === socket) {
-        return this.leftBarre;
-    } else if (this.rightBarre.socket === socket) {
-        return this.rightBarre;
+Pong.prototype.getMyRacket = function(socket) {
+    if (this.leftRacket.socket === socket) {
+        return this.leftRacket;
+    } else if (this.rightRacket.socket === socket) {
+        return this.rightRacket;
     } else {
         return null;
     }
 };
 
 Pong.prototype.launchPhysics = function() {
-    setInterval(function(ball, leftBarre, rightBarre, scoreRightPlayer, scoreLeftPlayer) {
+    setInterval(function(ball, leftRacket, rightRacket, scoreRightPlayer, scoreLeftPlayer) {
         ball.info[0] += ball.speed * ball.direction[0];
         ball.info[1] += ball.speed * ball.direction[1];
 
         //collision ball raquette left racket
-        if (leftBarre.isCollide(ball.info[0], ball.info[1], ball.info[2], ball.info[2])) {
+        if (leftRacket.isCollide(ball.info[0], ball.info[1], ball.info[2], ball.info[2])) {
             console.log("Collision left racket !!!");
             ball.direction[0] *= -1;
         }
 
         //collision ball right racket
-        else if (rightBarre.isCollide(ball.info[0], ball.info[1], ball.info[2], ball.info[2])) {
+        else if (rightRacket.isCollide(ball.info[0], ball.info[1], ball.info[2], ball.info[2])) {
             console.log("Collision right racket !!!");
             ball.direction[0] *= -1;
         }
@@ -81,20 +81,20 @@ Pong.prototype.launchPhysics = function() {
         }
         //score
         //Right player lose
-        else if ((ball.info[0] + ball.info[2]) > rightBarre.info[0] + 10) {
+        else if ((ball.info[0] + ball.info[2]) > rightRacket.info[0] + 10) {
             that.scoreLeftPlayer++;
             //On remet la ball au milieu
             console.log("Right player lose ball :" + ball.info);
             ball.init(50, 50);
         }
         //Left player lose
-        else if (ball.info[0] < (leftBarre.info[0] + leftBarre.info[2]) - 10) {
+        else if (ball.info[0] < (leftRacket.info[0] + leftRacket.info[2]) - 10) {
             that.scoreRightPlayer++;
             //Put the ball back in the middle
             console.log("Left player lose ball :" + ball.info);
             ball.init(50, 50);
         }
-    }, 16, this.ball, this.leftBarre, this.rightBarre, this.scoreRightPlayer, this.scoreLeftPlayer);
+    }, 16, this.ball, this.leftRacket, this.rightRacket, this.scoreRightPlayer, this.scoreLeftPlayer);
 };
 
 module.exports = Pong;

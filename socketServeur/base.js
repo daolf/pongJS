@@ -7,7 +7,7 @@ module.exports = function(io) {
 
         console.log("Un nouveau client se connecte: " + socket);
 
-        myPong.setSocketBarre(socket);
+        myPong.setSocketRacket(socket);
 
         //On demande au clients de refraichir leurs vues 60 fois par secondes
         setInterval(
@@ -18,15 +18,15 @@ module.exports = function(io) {
                 //console.log(myPong.getInfos());
             }, 16);
 
-        // Le client appuis sur une touche et est le proprietaire d'une barre
-        if (myPong.getMyBarre(socket) !== null) {
+        // Le client appuis sur une touche et est le proprietaire d'une Racket
+        if (myPong.getMyRacket(socket) !== null) {
             socket.on('keyPressed', function(data) {
                 switch (data.keyCode) {
                     case 38:
-                        myPong.getMyBarre(socket).moveUp(myPong.height);
+                        myPong.getMyRacket(socket).moveUp(myPong.height);
                         break;
                     case 40:
-                        myPong.getMyBarre(socket).moveDown(myPong.height);
+                        myPong.getMyRacket(socket).moveDown(myPong.height);
                         break;
                 }
                 // console.log("X: "+myBarre.info[0]+" Y: "+myBarre.info[1]);
