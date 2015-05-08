@@ -1,13 +1,11 @@
 body {
-    padding: 50px;
+    padding: 10px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
     color: #00B7FF;
 }
-
-
 
 .score {
     font-size: 20pt;
@@ -17,11 +15,12 @@ a {
 .col-btn {
     overflow: hidden;
     height: 400px;
+    width: auto;
     padding: 0
 }
     .btn-group-vertical {
         height: 100%;
-        width: 100%;
+        width: auto;
         margin : 0;
     }
     .btn {
